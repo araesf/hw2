@@ -16,15 +16,35 @@ std::string convToLower(std::string src)
 std::set<std::string> parseStringToWords(string rawWords)
 {
 
+  // remove whitespace and convert to lowercase
+  trim(rawWords);
+  rawWords = convToLower(rawWords);
 
+    std::set<std::string> words;
+    std::string word = "";
 
+    for (char c : rawWords) {
+        if (std::isalnum(c)) {
+          word += c;
+        }
 
+        else {
+          // append the word. dont append any whitespaces if character is over length of 2
+          if (word.size() >= 2) {
+            words.insert(word);
+          }
 
+          // reset word
+          word = "";
+        }
+    }
 
+    // if there are still remaining characters
+    if (word.size() >= 2) {
+      words.insert(word);
+    }
 
-
-
-
+    return words;
 }
 
 /**************************************************
